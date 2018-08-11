@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.nyasa.mctteacher.APIClient;
 import com.nyasa.mctteacher.Interface.loginInterface;
 import com.nyasa.mctteacher.Pojo.ParentPojoLogin;
+import com.nyasa.mctteacher.R;
 import com.nyasa.mctteacher.Storage.SPProfile;
 
 import org.json.JSONException;
@@ -87,18 +88,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             JSONObject jsonObject=new JSONObject(parentPojoLogin.getObjProfile().get(0));
                             spProfile.setIsLogin("true");
                             try {
-                                Log.e("driver_id",jsonObject.getString("driver_id"));
-                                spProfile.setDriver_id(jsonObject.getString("driver_id"));
+                                Log.e("teacher_id",jsonObject.getString("teacher_id"));
+                                spProfile.setTeacher_id(jsonObject.getString("teacher_id"));
                                 spProfile.setMac_id(jsonObject.getString("mac_id"));
                                 spProfile.setName(jsonObject.getString("name"));
 
                                 spProfile.setAddress(jsonObject.getString("address"));
-                                spProfile.setVehReg(jsonObject.getString("vehicle_reg_no"));
-                                spProfile.setVehType(jsonObject.getString("vehicle_type"));
-
                                 spProfile.setUsername(jsonObject.getString("username"));
                                 spProfile.setPassword(jsonObject.getString("password"));
-                                spProfile.setMobile(jsonObject.getString("school_id"));
+                                spProfile.setMobile(jsonObject.getString("phone"));
                                 spProfile.setSchoolId(jsonObject.getString("school_id"));
 
                             } catch (JSONException e) {

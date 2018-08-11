@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.joelwasserman.androidbletutorial.R;
-import com.example.joelwasserman.androidbletutorial.Storage.SPProfile;
+import com.nyasa.mctteacher.R;
+import com.nyasa.mctteacher.Storage.SPProfile;
 
 
 public class SplashActivity extends AppCompatActivity {

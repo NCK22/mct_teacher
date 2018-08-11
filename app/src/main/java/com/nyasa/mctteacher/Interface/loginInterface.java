@@ -15,7 +15,7 @@ public interface loginInterface {
 */
 
    @FormUrlEncoded
-   @POST("teacher/login/")
+   @POST("teacher/Login/")
    Call<ParentPojoLogin> doGetListResources(@Field("username") String username, @Field("password") String password);
 
 }

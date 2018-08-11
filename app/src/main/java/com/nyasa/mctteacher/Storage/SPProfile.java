@@ -31,9 +31,9 @@ public class SPProfile {
         return preferences.getString("profile_id", "");
     }
 
-    public String getDriver_id() {
+    public String getTeacher_id() {
 
-        return preferences.getString("driver_id", "");
+        return preferences.getString("teacher_id", "");
     }
 
     public String getName() {
@@ -110,10 +110,10 @@ public class SPProfile {
 
 
 
-    public void setDriver_id(String driver_id) {
+    public void setTeacher_id(String teacher_id) {
         // preferences = this.getSharedPreferences(prefName, 0);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("driver_id", driver_id);
+        editor.putString("teacher_id", teacher_id);
         editor.apply();
     }
 

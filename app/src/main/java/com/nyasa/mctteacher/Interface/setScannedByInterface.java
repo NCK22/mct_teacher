@@ -1,6 +1,6 @@
 package com.nyasa.mctteacher.Interface;
 
-import com.example.joelwasserman.androidbletutorial.Pojo.CommonParentPojo;
+import com.nyasa.mctteacher.Pojo.CommonParentPojo;
 
 import retrofit2.Call;
 import retrofit2.http.Field;

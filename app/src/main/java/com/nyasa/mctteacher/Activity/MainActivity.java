@@ -30,6 +30,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.nyasa.mctteacher.APIClient;
+import com.nyasa.mctteacher.Interface.setScannedByInterface;
+import com.nyasa.mctteacher.Pojo.CommonParentPojo;
+import com.nyasa.mctteacher.R;
+import com.nyasa.mctteacher.Storage.SPProfile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
     TextView peripheralTextView;
     RecyclerView rv_stud;
     ProgressDialog progressDialog;
-    ArrayList<ChildPojoStudProf> mListItem=new ArrayList<ChildPojoStudProf>();
-    ArrayList<ChildPojoStudProf> mListItem_bckp=new ArrayList<ChildPojoStudProf>();
+    /*ArrayList<ChildPojoStudProf> mListItem=new ArrayList<ChildPojoStudProf>();
+    ArrayList<ChildPojoStudProf> mListItem_bckp=new ArrayList<ChildPojoStudProf>();*/
     SPProfile spCustProfile;
-    StudentAdapter adapter;
+    //StudentAdapter adapter;
     public static ArrayList<String> list_macId=new ArrayList<String>();
 
     private boolean gps_enabled=false;
@@ -88,20 +93,21 @@ public class MainActivity extends AppCompatActivity {
            Log.e("macIdsize",""+list_macId.size());
                 if(list_macId.isEmpty()|| !list_macId.contains(result.getDevice().getAddress())) {
                     list_macId.add(result.getDevice().getAddress());
-                    Log.e("mListItem size",""+mListItem.size());
+                   /* Log.e("mListItem size",""+mListItem.size());
                     for(int i=0;i<mListItem.size();i++)
                     {
                         Log.e("MACId",mListItem.get(i).getChildMacID());
                         if(mListItem.get(i).getChildMacID().equalsIgnoreCase(result.getDevice().getAddress()))
                             mListItem.get(i).setFound("true");
-                    }
+                    }*/
                 }
            // }
 
-            //if(!peripheralTextView.getText().toString().contains(result.getDevice().getAddress()))
-            if(!list_macId.contains(result.getDevice().getAddress()))
-            peripheralTextView.setText("MAC ADDRESS: " + result.getDevice().getAddress() + "\nRSSI: " + result.getRssi() + "\nBondState: " + result.getDevice().getBondState() + "\nDistance: " + calculateDistance(result.getRssi()) + "\n-----------------------------------------\n");
-           adapter.notifyDataSetChanged();
+
+          //  if(!list_macId.contains(result.getDevice().getAddress()))
+            if(!peripheralTextView.getText().toString().contains(result.getDevice().getAddress()))
+            peripheralTextView.append("MAC ADDRESS: " + result.getDevice().getAddress() + "\nRSSI: " + result.getRssi() + "\nBondState: " + result.getDevice().getBondState() + "\nDistance: " + calculateDistance(result.getRssi()) + "\n-----------------------------------------\n");
+         //  adapter.notifyDataSetChanged();
         }
     };
 
@@ -163,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             builder.show();
         }
 
-        getStudentList();
+       // getStudentList();
     //    EnableRuntimePermissionToAccessCamera();
 
      //   startService(new Intent(MainActivity.this, TrackLocService.class));
@@ -205,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
             case PERMISSION_REQUEST_COARSE_LOCATION: {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     System.out.println("coarse location permission granted");
-                    startService(new Intent(MainActivity.this, TrackLocService.class));
+                  //  startService(new Intent(MainActivity.this, TrackLocService.class));
                 } else {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("Functionality limited");
@@ -227,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // {Some Code}
 
-                    startService(new Intent(MainActivity.this, TrackLocService.class));
+                  //  startService(new Intent(MainActivity.this, TrackLocService.class));
                 }
             }
 
@@ -274,110 +280,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        for(int i=0;i<mListItem.size();i++)
+        for(int i=0;i<list_macId.size();i++)
         {
-            if(mListItem.get(i).getFound().equalsIgnoreCase("true"))
-          //  setChildStatusActive(mListItem.get(i).getChild_id(),mListItem.get(i).getChildMacID());
-                setScannedBy(mListItem.get(i).getChildMacID());
+
+                setScannedBy(list_macId.get(i));
         }
 
     }
 
-    public void getStudentList(){
 
-        progressDialog.show();
-
-if(mListItem!=null)
-    mListItem.clear();
-
-        getChildListInterface getResponse = APIClient.getClient().create(getChildListInterface.class);
-        Call<ParentPojoStudProf> call = getResponse.doGetListResources(spCustProfile.getDriver_id());
-        call.enqueue(new Callback<ParentPojoStudProf>() {
-            @Override
-            public void onResponse(Call<ParentPojoStudProf> call, Response<ParentPojoStudProf> response) {
-
-                Log.e("Inside","onResponse");
-                // Log.e("response body",response.body().getStatus());
-                //Log.e("response body",response.body().getMsg());
-                ParentPojoStudProf parentPojoStudProf =response.body();
-                if(parentPojoStudProf !=null){
-                    if(parentPojoStudProf.getStatus().equalsIgnoreCase("true")){
-                        mListItem=parentPojoStudProf.getObjProfile();
-                        mListItem_bckp=parentPojoStudProf.getObjProfile();
-                        //  noOfTabs=list_child.size();
-                        Log.e("Response","Success");
-
-                        if(mListItem.size()>0){
-                            displayData();
-                        }
-
-
-
-                        //      Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
-
-                        //setHeader();
-
-                    }
-                }
-                else
-                    Log.e("parentpojotabwhome","null");
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<ParentPojoStudProf> call, Throwable t) {
-
-                Log.e("throwable",""+t);
-                progressDialog.dismiss();
-            }
-        });
-
-    }
-
-    public void setChildStatusActive(String child_id, String mac_id){
-
-        progressDialog.show();
-
-        if(mListItem!=null)
-            mListItem.clear();
-
-        setChildStatusActiveInterface getResponse = APIClient.getClient().create(setChildStatusActiveInterface.class);
-        Call<CommonParentPojo> call = getResponse.doGetListResources(child_id,"1",mac_id);
-        call.enqueue(new Callback<CommonParentPojo>() {
-            @Override
-            public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
-
-                Log.e("Inside","onResponse");
-                // Log.e("response body",response.body().getStatus());
-                //Log.e("response body",response.body().getMsg());
-                CommonParentPojo CommonParentPojo =response.body();
-                if(CommonParentPojo !=null){
-                    if(CommonParentPojo.getStatus().equalsIgnoreCase("true")){
-
-                        //  noOfTabs=list_child.size();
-                        Log.e("Response","Success");
-
-
-                        //      Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
-
-                        //setHeader();
-
-                    }
-                }
-                else
-                    Log.e("parentpojotabwhome","null");
-                progressDialog.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<CommonParentPojo> call, Throwable t) {
-
-                Log.e("throwable",""+t);
-                progressDialog.dismiss();
-            }
-        });
-
-    }
 
     public void setScannedBy(String child_mac_id){
 
@@ -387,7 +298,7 @@ if(mListItem!=null)
             mListItem.clear();*/
 
         setScannedByInterface getResponse = APIClient.getClient().create(setScannedByInterface.class);
-        Call<CommonParentPojo> call = getResponse.doGetListResources(child_mac_id,spCustProfile.getDriver_id(),"driver");
+        Call<CommonParentPojo> call = getResponse.doGetListResources(child_mac_id,spCustProfile.getTeacher_id(),"teacher");
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
             public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
@@ -425,17 +336,17 @@ if(mListItem!=null)
     }
 
 
-    private void displayData() {
+   /* private void displayData() {
 
         adapter = new StudentAdapter(MainActivity.this, mListItem);
         rv_stud.setAdapter(adapter);
 
-        /*if (adapter.getItemCount() == 0) {
+        *//*if (adapter.getItemCount() == 0) {
             lyt_not_found.setVisibility(View.VISIBLE);
         } else {
             lyt_not_found.setVisibility(View.GONE);
-        }*/
-    }
+        }*//*
+    }*/
 
     public void EnableRuntimePermissionToAccessCamera(){
 
@@ -482,9 +393,9 @@ if(mListItem!=null)
                 logout();
                 break;
 
-            case R.id.menu_profile:
+           /* case R.id.menu_profile:
                 startActivity(new Intent(MainActivity.this,ProfileActivity.class));
-                break;
+                break;*/
 
 
             default:
@@ -503,7 +414,7 @@ if(mListItem!=null)
                         stopScanning();
                         //MyApp.saveIsLogin(false);
                         spCustProfile.setIsLogin("false");
-                        spCustProfile.setDriver_id("");
+                        spCustProfile.setTeacher_id("");
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -561,7 +472,7 @@ if(mListItem!=null)
             builder.create().show();
 
         }
-        else
-            startService(new Intent(MainActivity.this, TrackLocService.class));
+        /*else
+            startService(new Intent(MainActivity.this, TrackLocService.class));*/
     }
 }
