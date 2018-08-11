@@ -6,62 +6,23 @@ public class ChildPojoStudProf {
 
     String found="false";
 
-    @SerializedName("driverId")
-    String driverId;
+    @SerializedName("standard_id")
+    String standard_id;
 
     @SerializedName("name")
     String name;
 
-    @SerializedName("address")
-    String address;
-
-    @SerializedName("vehicleType")
-    String vehicleType;
-
-    @SerializedName("vehicleRegNo")
-    String vehicleRegNo;
-
-    @SerializedName("phone")
-    String phone;
-
-    @SerializedName("macId")
-    String macId;
-
-    @SerializedName("username")
-    String username;
-
-    @SerializedName("password")
-    String password;
-
-    @SerializedName("school_id")
-    String school_id;
-
-    @SerializedName("schoolName")
-    String schoolName;
-
-    @SerializedName("child_id")
-    String child_id;
-
-    @SerializedName("childName")
-    String childName;
-
-    @SerializedName("childMacID")
-    String childMacID;
+    @SerializedName("class_id")
+    String class_id;
 
     @SerializedName("mac_id")
     String mac_id;
 
-    @SerializedName("stauts")
-    String stauts;
+    @SerializedName("status")
+    String status;
 
 
-    public String getDriverId() {
-        return driverId;
-    }
 
-    public void setDriverId(String driverId) {
-        this.driverId = driverId;
-    }
 
     public String getFound() {
         return found;
@@ -79,100 +40,28 @@ public class ChildPojoStudProf {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+
+    public String getStandard_id() {
+        return standard_id;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStandard_id(String standard_id) {
+        this.standard_id = standard_id;
     }
 
-    public String getVehicleType() {
-        return vehicleType;
+    public String getClass_id() {
+        return class_id;
     }
 
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
+    public void setClass_id(String class_id) {
+        this.class_id = class_id;
     }
 
-    public String getVehicleRegNo() {
-        return vehicleRegNo;
+    public String getStatus() {
+        return status;
     }
 
-    public void setVehicleRegNo(String vehicleRegNo) {
-        this.vehicleRegNo = vehicleRegNo;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getMacId() {
-        return macId;
-    }
-
-    public void setMacId(String macId) {
-        this.macId = macId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getSchool_id() {
-        return school_id;
-    }
-
-    public void setSchool_id(String school_id) {
-        this.school_id = school_id;
-    }
-
-    public String getSchoolName() {
-        return schoolName;
-    }
-
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
-    }
-
-    public String getChild_id() {
-        return child_id;
-    }
-
-    public void setChild_id(String child_id) {
-        this.child_id = child_id;
-    }
-
-    public String getChildName() {
-        return childName;
-    }
-
-    public void setChildName(String childName) {
-        this.childName = childName;
-    }
-
-    public String getChildMacID() {
-        return childMacID;
-    }
-
-    public void setChildMacID(String childMacID) {
-        this.childMacID = childMacID;
-    }
-
 }

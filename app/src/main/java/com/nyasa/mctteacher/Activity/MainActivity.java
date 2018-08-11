@@ -31,8 +31,12 @@ import android.widget.TextView;
 
 
 import com.nyasa.mctteacher.APIClient;
+import com.nyasa.mctteacher.Adapter.StudentAdapter;
+import com.nyasa.mctteacher.Interface.getScannedByInterface;
 import com.nyasa.mctteacher.Interface.setScannedByInterface;
+import com.nyasa.mctteacher.Pojo.ChildPojoStudProf;
 import com.nyasa.mctteacher.Pojo.CommonParentPojo;
+import com.nyasa.mctteacher.Pojo.ParentPojoStudProf;
 import com.nyasa.mctteacher.R;
 import com.nyasa.mctteacher.Storage.SPProfile;
 
@@ -55,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
     TextView peripheralTextView;
     RecyclerView rv_stud;
     ProgressDialog progressDialog;
-    /*ArrayList<ChildPojoStudProf> mListItem=new ArrayList<ChildPojoStudProf>();
-    ArrayList<ChildPojoStudProf> mListItem_bckp=new ArrayList<ChildPojoStudProf>();*/
+    ArrayList<ChildPojoStudProf> mListItem=new ArrayList<ChildPojoStudProf>();
+    ArrayList<ChildPojoStudProf> mListItem_bckp=new ArrayList<ChildPojoStudProf>();
     SPProfile spCustProfile;
-    //StudentAdapter adapter;
+    StudentAdapter adapter;
     public static ArrayList<String> list_macId=new ArrayList<String>();
 
     private boolean gps_enabled=false;
@@ -313,6 +317,8 @@ public class MainActivity extends AppCompatActivity {
                         //  noOfTabs=list_child.size();
                         Log.e("Response","Success");
 
+                        getScannedByTeacher();
+
 
                         //      Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
 
@@ -335,18 +341,66 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void getScannedByTeacher(){
 
-   /* private void displayData() {
+        progressDialog.show();
+
+       /* if(mListItem!=null)
+            mListItem.clear();*/
+
+        getScannedByInterface getResponse = APIClient.getClient().create(getScannedByInterface.class);
+        Call<ParentPojoStudProf> call = getResponse.doGetListResources("teacher");
+        call.enqueue(new Callback<ParentPojoStudProf>() {
+            @Override
+            public void onResponse(Call<ParentPojoStudProf> call, Response<ParentPojoStudProf> response) {
+
+                Log.e("Inside","onResponse");
+                // Log.e("response body",response.body().getStatus());
+                //Log.e("response body",response.body().getMsg());
+                ParentPojoStudProf parentPojoStudProf =response.body();
+                if(parentPojoStudProf !=null){
+                    if(parentPojoStudProf.getStatus().equalsIgnoreCase("true")){
+
+                        //  noOfTabs=list_child.size();
+                        Log.e("Response","Success");
+
+                            mListItem=parentPojoStudProf.getObjProfile();
+                            displayData();
+
+
+                        //      Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
+
+                        //setHeader();
+
+                    }
+                }
+                else
+                    Log.e("parentpojotabwhome","null");
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ParentPojoStudProf> call, Throwable t) {
+
+                Log.e("throwable",""+t);
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+
+
+    private void displayData() {
 
         adapter = new StudentAdapter(MainActivity.this, mListItem);
         rv_stud.setAdapter(adapter);
 
-        *//*if (adapter.getItemCount() == 0) {
+      /*  if (adapter.getItemCount() == 0) {
             lyt_not_found.setVisibility(View.VISIBLE);
         } else {
             lyt_not_found.setVisibility(View.GONE);
-        }*//*
-    }*/
+        }*/
+    }
 
     public void EnableRuntimePermissionToAccessCamera(){
 

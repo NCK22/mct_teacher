@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nyasa.mctteacher.Pojo.ChildPojoStudProf;
+import com.nyasa.mctteacher.R;
 
 import java.util.ArrayList;
 
@@ -43,15 +44,15 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ItemRowH
     @Override
     public void onBindViewHolder(ItemRowHolder holder, final int position) {
         final ChildPojoStudProf singleItem = dataList.get(position);
-        holder.textName.setText(singleItem.getChildName());
-        holder.textStd.setText(singleItem.getStd());
-        holder.textRollNo.setText(singleItem.getRollNo());
+        holder.textName.setText(singleItem.getName());
+        holder.textStd.setText(singleItem.getStandard_id());
+        holder.textRollNo.setText(singleItem.getClass_id());
 
        /* if(MainActivity.list_macId.contains(singleItem.getChildMacID()))
             holder.imgStatus.setImageResource(R.drawable.ic_present);*/
 
         if(singleItem.getFound().equalsIgnoreCase("true"))
-            holder.imgStatus.setImageResource(R.drawable.ic_present);
+//            holder.imgStatus.setImageResource(R.drawable.ic_present);
 
       /*  holder.textDescrip.setText(singleItem.getCompDescr());
         holder.textIType.setText(singleItem.getCompIType());
