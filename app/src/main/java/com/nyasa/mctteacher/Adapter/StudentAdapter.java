@@ -45,8 +45,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ItemRowH
     public void onBindViewHolder(ItemRowHolder holder, final int position) {
         final ChildPojoStudProf singleItem = dataList.get(position);
         holder.textName.setText(singleItem.getName());
-        holder.textStd.setText(singleItem.getStandard_id());
-        holder.textRollNo.setText(singleItem.getClass_id());
+        holder.textStd.setText("Std. "+singleItem.getStandard_id()+" Div."+singleItem.getClass_id());
+        holder.textRollNo.setText(singleItem.getRoll_no());
 
        /* if(MainActivity.list_macId.contains(singleItem.getChildMacID()))
             holder.imgStatus.setImageResource(R.drawable.ic_present);*/

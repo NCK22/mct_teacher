@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        card_view:cardBackgroundColor="#FFFFFF"
+        card_view:cardBackgroundColor="#515151"
         card_view:cardCornerRadius="2dp"
         card_view:cardUseCompatPadding="false"
         card_view:elevation="5dp">
@@ -28,37 +28,37 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:singleLine="true"
+                android:singleLine="false"
                 android:text="child name"
-                android:background="#FFFDE7"
+                android:background="#00000000"
                 android:textSize="17sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/tv_std"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:singleLine="true"
+                android:singleLine="false"
                 android:text="Std."
-                android:background="#FFFDE7"
+                android:background="#00000000"
                 android:textSize="17sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
 
             <TextView
                 android:id="@+id/tv_rollno"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:singleLine="true"
                 android:text=""
-                android:background="#FFFDE7"
+                android:background="#00000000"
                 android:textSize="17sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#000000" />
+                android:textColor="#FFFFFF" />
 
 
 

@@ -21,7 +21,8 @@ public class ChildPojoStudProf {
     @SerializedName("status")
     String status;
 
-
+    @SerializedName("roll_no")
+    String roll_no;
 
 
     public String getFound() {
@@ -63,5 +64,13 @@ public class ChildPojoStudProf {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getRoll_no() {
+        return roll_no;
+    }
+
+    public void setRoll_no(String roll_no) {
+        this.roll_no = roll_no;
     }
 }

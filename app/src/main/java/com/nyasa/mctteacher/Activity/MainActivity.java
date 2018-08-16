@@ -28,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.nyasa.mctteacher.APIClient;
@@ -266,15 +267,17 @@ public class MainActivity extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-
+if(btScanner!=null)
                 btScanner.startScan(leScanCallback);
+else
+    Toast.makeText(MainActivity.this, "Please try Again", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void stopScanning() {
         System.out.println("stopping scanning");
-        peripheralTextView.append("Stopped Scanning");
+        peripheralTextView.setText("Stopped Scanning");
         startScanningButton.setVisibility(View.VISIBLE);
         stopScanningButton.setVisibility(View.INVISIBLE);
         AsyncTask.execute(new Runnable() {
@@ -345,8 +348,8 @@ public class MainActivity extends AppCompatActivity {
 
         progressDialog.show();
 
-       /* if(mListItem!=null)
-            mListItem.clear();*/
+        if(mListItem!=null)
+            mListItem.clear();
 
         getScannedByInterface getResponse = APIClient.getClient().create(getScannedByInterface.class);
         Call<ParentPojoStudProf> call = getResponse.doGetListResources("teacher");
