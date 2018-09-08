@@ -17,8 +17,6 @@ public class ParentPojoStudProf {
     ArrayList<ChildPojoStudProf> objProfile;
 
 
-
-
     public String getStatus() {
         return status;
     }
