@@ -21,6 +21,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -29,6 +30,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 
 import com.nyasa.mctteacher.APIClient;
@@ -69,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean gps_enabled=false;
     public static AlertDialog.Builder builder;
     public static boolean builderFlag=false;
+
+    Toolbar toolbar;
+    TextView toolbar_textview;
     // Device scan callback.
     private ScanCallback leScanCallback = new ScanCallback() {
         @Override
@@ -123,6 +128,13 @@ public class MainActivity extends AppCompatActivity {
 
         progressDialog=new ProgressDialog(this);
         spCustProfile=new SPProfile(this);
+
+
+       toolbar=(Toolbar) findViewById(R.id.toolbar);
+        toolbar_textview=(TextView)findViewById(R.id.toolbar_title);
+        toolbar.setTitle("");
+        toolbar_textview.setText("Scan");
+        setSupportActionBar(toolbar);
 
         rv_stud=(RecyclerView)findViewById(R.id.rv_stud);
         rv_stud.setHasFixedSize(true);
@@ -294,8 +306,6 @@ else
         }
 
     }
-
-
 
     public void setScannedBy(String child_mac_id){
 

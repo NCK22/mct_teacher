@@ -16,7 +16,6 @@ public class ParentPojoStudProf {
     @SerializedName("message")
     ArrayList<ChildPojoStudProf> objProfile;
 
-
     public String getStatus() {
         return status;
     }

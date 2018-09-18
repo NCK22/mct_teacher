@@ -29,7 +29,6 @@ public class SplashActivity extends AppCompatActivity {
                             startActivity(new Intent(SplashActivity.this,MainActivity.class));
                                     else
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-
                                     finish();
 
                 } catch (InterruptedException e) {
@@ -42,7 +41,5 @@ public class SplashActivity extends AppCompatActivity {
 
         };
         splash.start();
-
-
     }
 }
