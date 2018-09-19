@@ -24,7 +24,8 @@
         android:textSize="16sp"
         android:text="Toolbar Title"
         android:layout_gravity="center"
-        android:id="@+id/toolbar_title" />
+        android:id="@+id/toolbar_title"
+        android:layout_marginRight="20dp"/>
     </android.support.v7.widget.Toolbar>
 
 </LinearLayout>
