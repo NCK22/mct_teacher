@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar_textview.setText("Scan");
         setSupportActionBar(toolbar);
 
+
         rv_stud=(RecyclerView)findViewById(R.id.rv_stud);
         rv_stud.setHasFixedSize(true);
         rv_stud.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

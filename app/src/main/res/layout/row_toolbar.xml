@@ -16,16 +16,23 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
 
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/transparent"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:fontFamily="calibary"
         android:text="Toolbar Title"
-        android:layout_gravity="center"
+        android:layout_gravity="left"
         android:id="@+id/toolbar_title"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginStart="50dp"/>
     </android.support.v7.widget.Toolbar>
 
 </LinearLayout>
