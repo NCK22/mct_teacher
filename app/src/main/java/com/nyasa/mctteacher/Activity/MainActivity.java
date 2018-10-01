@@ -166,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
         btAdapter = btManager.getAdapter();
         btScanner = btAdapter.getBluetoothLeScanner();
 
-
         if (btAdapter != null && !btAdapter.isEnabled()) {
             Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
@@ -280,10 +279,19 @@ public class MainActivity extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-if(btScanner!=null)
-                btScanner.startScan(leScanCallback);
-else
-    Toast.makeText(MainActivity.this, "Please try Again", Toast.LENGTH_SHORT).show();
+
+                if(btScanner!=null)
+                    btScanner.startScan(leScanCallback);
+                else {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(MainActivity.this, "Please try again", Toast.LENGTH_SHORT).show();
+                            stopScanningButton.setVisibility(View.INVISIBLE);
+                            startScanningButton.setVisibility(View.VISIBLE);
+                        }
+                    });
+                }
+
             }
         });
     }
