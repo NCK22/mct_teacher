@@ -310,7 +310,6 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i=0;i<list_macId.size();i++)
         {
-
                 setScannedBy(list_macId.get(i));
         }
 
@@ -410,7 +409,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
     private void displayData() {
 
